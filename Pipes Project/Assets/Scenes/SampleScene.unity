@@ -325,7 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bccc2d09cc238b4da63e8e812389c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PipePrefab: {fileID: 0}
+  PipePrefab: {fileID: 7698591717271763715, guid: 003818df7fe92ef459d1a132dce11980,
+    type: 3}
 --- !u!4 &1622263543
 Transform:
   m_ObjectHideFlags: 0

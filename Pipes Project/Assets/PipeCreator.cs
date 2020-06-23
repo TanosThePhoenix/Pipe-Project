@@ -29,7 +29,9 @@ public class PipeCreator : MonoBehaviour
         TurnsX.Sort();
         Debug.Log("TurnsX:");
         foreach (var i in TurnsX)
+        {
             Debug.Log(i);
+        }
 
         List<int> TurnsY = new List<int>();
         for (int i = 0; i < 3; i++)
@@ -38,7 +40,10 @@ public class PipeCreator : MonoBehaviour
         }
         Debug.Log("TurnsY:");
         foreach (var i in TurnsY)
+        {
             Debug.Log(i);
+        }
+
 
         //Instantiate Lengths of Pipe
         Vector3 PipePosition;
@@ -49,18 +54,23 @@ public class PipeCreator : MonoBehaviour
             Instantiate(PipePrefab, PipePosition, Quaternion.identity);
         }
         int x = TurnsX[1];
-        if (TurnsY[0] < TurnsY [1])
-            for (int i = TurnsY[0]; i<=TurnsY[1]; i++)
+        if (TurnsY[0] < TurnsY[1])
+        {
+            for (int i = TurnsY[0]; i <= TurnsY[1]; i++)
             {
                 PipePosition = new Vector3(x, 0, i);
                 Instantiate(PipePrefab, PipePosition, Quaternion.identity);
             }
+        }
         else
-            for (int i = TurnsY[0]; i >= TurnsY[1]; i++)
+        {
+            for (int i = TurnsY[0]; i >= TurnsY[1]; i--)
             {
                 PipePosition = new Vector3(x, 0, i);
                 Instantiate(PipePrefab, PipePosition, Quaternion.identity);
             }
+        }
+
         y = TurnsY[2];
         for (int i = 0; i < TurnsX[2]; i++)
         {
@@ -75,10 +85,12 @@ public class PipeCreator : MonoBehaviour
                 Instantiate(PipePrefab, PipePosition, Quaternion.identity);
             }
         else
-            for (int i = TurnsY[1]; i >= TurnsY[2]; i++)
+        {
+            for (int i = TurnsY[1]; i >= TurnsY[2]; i--)
             {
                 PipePosition = new Vector3(x, 0, i);
                 Instantiate(PipePrefab, PipePosition, Quaternion.identity);
             }
+        }
     }
 }
