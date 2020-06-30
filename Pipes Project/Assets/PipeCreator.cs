@@ -72,7 +72,7 @@ public class PipeCreator : MonoBehaviour
         }
 
         y = TurnsY[2];
-        for (int i = 0; i < TurnsX[2]; i++)
+        for (int i = TurnsX[1]; i < TurnsX[2]; i++)
         {
             PipePosition = new Vector3(i, 0, y);
             Instantiate(PipePrefab, PipePosition, Quaternion.identity);
