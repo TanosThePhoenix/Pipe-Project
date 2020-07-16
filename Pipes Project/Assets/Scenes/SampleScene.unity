@@ -403,6 +403,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PipePrefab: {fileID: 7698591717271763715, guid: 003818df7fe92ef459d1a132dce11980,
     type: 3}
+  PipeSectionList: []
+  ValveModel: {fileID: 6692825026671182239, guid: 86ade0f068d8d9c47850050610c68a4e,
+    type: 3}
+  DebugMat: {fileID: 2100000, guid: df3d862734b22b14a94d36ddbe0668ad, type: 2}
 --- !u!4 &1622263543
 Transform:
   m_ObjectHideFlags: 0
