@@ -26,6 +26,7 @@ public class PipeCreator : MonoBehaviour
         {
             TurnsX.Add(Random.Range(1, 30));
         }
+        //Debugging Info
         TurnsX.Sort();
         Debug.Log("TurnsX:");
         foreach (var i in TurnsX)
@@ -38,6 +39,7 @@ public class PipeCreator : MonoBehaviour
         {
             TurnsY.Add(Random.Range(1, 30));
         }
+        //Debugging Info
         Debug.Log("TurnsY:");
         foreach (var i in TurnsY)
         {
@@ -47,7 +49,7 @@ public class PipeCreator : MonoBehaviour
 
         //Instantiate Lengths of Pipe
         Vector3 PipePosition;
-        int y = TurnsY[1];
+        int y = TurnsY[0];
         for (int i = 0; i < TurnsX[1]; i++)
         {
             PipePosition = new Vector3(i, 0, y);
@@ -71,8 +73,8 @@ public class PipeCreator : MonoBehaviour
             }
         }
 
-        y = TurnsY[2];
-        for (int i = TurnsX[1]; i < TurnsX[2]; i++)
+        y = TurnsY[1];
+        for (int i = TurnsX[1]+1; i < TurnsX[2]; i++)
         {
             PipePosition = new Vector3(i, 0, y);
             Instantiate(PipePrefab, PipePosition, Quaternion.identity);
@@ -91,6 +93,13 @@ public class PipeCreator : MonoBehaviour
                 PipePosition = new Vector3(x, 0, i);
                 Instantiate(PipePrefab, PipePosition, Quaternion.identity);
             }
+        }
+
+        y = TurnsY[2];
+        for (int i = TurnsX[2]+1; i < 31; i++)
+        {
+            PipePosition = new Vector3(i, 0, y);
+            Instantiate(PipePrefab, PipePosition, Quaternion.identity);
         }
     }
 }
