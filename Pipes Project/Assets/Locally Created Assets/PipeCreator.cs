@@ -7,7 +7,7 @@ public class PipeCreator : MonoBehaviour
     public GameObject PipePrefab;
     public List<GameObject> PipeSectionList;
     public GameObject ValveModel;
-    private GameObject Valve;
+    public GameObject Valve;
 
     //Debug Things
     public Material DebugMat;
