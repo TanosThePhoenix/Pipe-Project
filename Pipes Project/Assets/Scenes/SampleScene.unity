@@ -1206,7 +1206,7 @@ MonoBehaviour:
   PipeSectionList: []
   ValveModel: {fileID: 6692825026671182239, guid: 86ade0f068d8d9c47850050610c68a4e,
     type: 3}
-  Valve: {fileID: 1622263541}
+  Valve: {fileID: 0}
   DebugMat: {fileID: 2100000, guid: df3d862734b22b14a94d36ddbe0668ad, type: 2}
 --- !u!4 &1622263543
 Transform:
