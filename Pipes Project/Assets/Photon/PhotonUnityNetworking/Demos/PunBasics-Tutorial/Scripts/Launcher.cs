@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using Photon.Realtime;
 
@@ -41,6 +42,12 @@ namespace Photon.Pun.Demo.PunBasics
 		[SerializeField]
 		private LoaderAnime loaderAnime;
 
+
+
+		[SerializeField]
+		private GameObject playerPrefab;
+
+
 		#endregion
 
 		#region Private Fields
@@ -65,14 +72,14 @@ namespace Photon.Pun.Demo.PunBasics
 		/// </summary>
 		void Awake()
 		{
-			if (loaderAnime==null)
+			/*if (loaderAnime==null)
 			{
 				Debug.LogError("<Color=Red><b>Missing</b></Color> loaderAnime Reference.",this);
-			}
+			}*/
 
 			// #Critical
 			// this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
-			PhotonNetwork.AutomaticallySyncScene = true;
+			//PhotonNetwork.AutomaticallySyncScene = true;
 
 		}
 
@@ -108,7 +115,14 @@ namespace Photon.Pun.Demo.PunBasics
 			{
 				LogFeedback("Joining Room...");
 				// #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-				PhotonNetwork.JoinRandomRoom();
+				//PhotonNetwork.JoinRandomRoom();
+
+				RoomOptions options = new RoomOptions();
+				options.IsOpen = true;
+				options.MaxPlayers = maxPlayersPerRoom;
+				PhotonNetwork.JoinOrCreateRoom("GameRoom",options, TypedLobby.Default);
+
+
 			}else{
 
 				LogFeedback("Connecting...");
@@ -154,9 +168,12 @@ namespace Photon.Pun.Demo.PunBasics
 			{
 				LogFeedback("OnConnectedToMaster: Next -> try to Join Random Room");
 				Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room.\n Calling: PhotonNetwork.JoinRandomRoom(); Operation will fail if no room found");
-		
+
 				// #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-				PhotonNetwork.JoinRandomRoom();
+				RoomOptions options = new RoomOptions();
+				options.IsOpen = true;
+				options.MaxPlayers = maxPlayersPerRoom;
+				PhotonNetwork.JoinOrCreateRoom("GameRoom", options, TypedLobby.Default);
 			}
 		}
 
@@ -209,17 +226,28 @@ namespace Photon.Pun.Demo.PunBasics
 			Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.\nFrom here on, your game would be running.");
 		
 			// #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.AutomaticallySyncScene to sync our instance scene.
-			if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+			//if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
 			{
 				Debug.Log("We load the 'Room for 1' ");
 
 				// #Critical
 				// Load the Room Level. 
-				PhotonNetwork.LoadLevel("PunBasics-Room for 1");
+				PhotonNetwork.LoadLevel("Game");
 
 			}
+
+			SceneManager.sceneLoaded += OnSceneLoaded;
 		}
 
+
+		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+			if (scene.name == "Game")
+            {
+				Transform spawnPoint = GameObject.Find("SpawnPoint").transform;
+				PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+            }
+        }
 		#endregion
 		
 	}
